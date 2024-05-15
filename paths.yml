@@ -27,6 +27,61 @@ servers:
        - "8443"
        - "443"
       default: "8443"  
+      description: my description
      version: 
-        default: v1
-paths: {} 
+        default: v1  
+        description: my version
+   description: my description
+paths: 
+ /categories: 
+   get: 
+     summary: list of all the categoires
+     description: returns the list of all categories
+     responses: 
+      '200':
+        description:  a list of categoies 
+        content: 
+         application/json: 
+          schema: 
+           type: array
+           items: 
+            type: object
+            properties: 
+             categoryid: 
+              type: integer
+             name: 
+              type: string
+             city:
+              type: string
+             address: 
+              type: string
+              
+ /mycategories:
+  post:
+   summary: dhsfjhsf
+   description : skhfskhfsd
+   responses: 
+    '200':
+      description: dkjfkdf
+      content: 
+       application/json: 
+        schema: 
+         type: array
+         items: 
+          type: object
+          properties: 
+           myid:
+            type: integer
+           myname:
+            type: string
+           
+           
+          
+          
+      
+  
+     
+    
+ 
+   
+ 
