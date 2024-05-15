@@ -1,0 +1,20 @@
+servers:
+ - url: https://www.google.com
+   description: my description
+ - url: https://www.google.com
+   description: my description
+ - url: https://{username}.server.com:{port}/{version}
+   variables: 
+     username:
+       default: demo       
+       description: my description  
+     port:
+      enum:
+       - "8443"
+       - "443"
+      default: "8443"  
+      description: my description
+     version: 
+        default: v1  
+        description: my version
+   description: my description
