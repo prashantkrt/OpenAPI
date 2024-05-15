@@ -1,0 +1,16 @@
+openapi: 3.0.3
+info(info object): 
+   title(string): my titile 
+   summary(string): A short summary of the api
+   description(string): detail description of the api 
+   termsOfService(string): A url of terms of the service for the api. Must be in form of the url
+   contact(Contact Object):
+    name(string):
+    url(string):
+    email(string):
+   license(License Object):
+    name(string):
+    identifier(string):
+    url(string): 
+   version(string): 0.0.1
+paths: {}   
