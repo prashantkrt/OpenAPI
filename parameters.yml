@@ -1,0 +1,95 @@
+openapi: 3.0.3
+info: 
+ title: my title
+ description: |
+   tvero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat
+ termsOfService: https://www.google.com   
+ contact:
+  name: Raj
+  email: akks@gmail.com
+  url: https://www.google.com   
+ license: 
+  name: name
+  url: https://google.com
+ version: 0.0.1
+servers:
+ - url: https://www.google.com
+   description: my description
+ - url: https://www.google.com
+   description: my description
+ - url: https://{username}.server.com:{port}/{version}
+   variables: 
+     username:
+       default: demo       
+       description: my description  
+     port:
+      enum:
+       - "8443"
+       - "443"
+      default: "8443"  
+      description: my description
+     version: 
+        default: v1  
+        description: my version
+   description: my description
+paths: 
+ /categories: 
+   get: 
+     summary: list of all the categoires
+     description: returns the list of all categories
+     responses: 
+      '200':
+        description:  a list of categoies 
+        content: 
+         application/json: 
+          schema: 
+           type: array
+           items: 
+            type: object
+            properties: 
+             categoryid: 
+              type: integer
+             name: 
+              type: string
+             city:
+              type: string
+             address: 
+              type: string
+              
+ /mycategories:
+   post:
+    summary: dhsfjhsf
+    description : skhfskhfsd
+    parameters: 
+     - name: name
+       in: query
+       required: true  
+       schema: 
+         type: integer
+         minimum: 10
+         maximum: 100
+    responses: 
+      '200':
+        description: dkjfkdf
+        content: 
+         application/json:
+          schema: 
+           type: array
+           items: 
+            type: object
+           properties: 
+            myid:
+             type: integer
+            myname:
+             type: string
+           
+           
+          
+          
+      
+  
+     
+    
+ 
+   
+ 
