@@ -48,7 +48,58 @@
            type: string
           zipcode: 
            type: string      
-           
+  put: 
+   summary : update order details
+   description: update order details for processing and shipping
+   
+   responses: 
+    '201':
+      description: updated order details
+      # content: 
+      # application/json: 
+      #   schema: 
+      #   type: object
+      #   properties: 
+      #     result: 
+      #     type: string
+          
+   requestBody: 
+    content: 
+     application/json: 
+      schema: 
+       type: object
+       properties: 
+        orderId: 
+         type: integer
+        product: 
+         type: array 
+         items: 
+          type: object
+          properties: 
+           productId:
+            type: integer
+           name: 
+            type: string
+           price: 
+            type: integer
+           categoryName: 
+            type: string
+
+  delete: 
+   summary : update order details
+   description: update order details for processing and shipping
+   parameters: 
+       - name: orderId
+         in: query
+         required: true  
+         schema: 
+           type: string
+         example: order12   
+   responses: 
+    '200':
+      description: delete the order 
+               
+                       
 
 
 
