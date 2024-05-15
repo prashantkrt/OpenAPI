@@ -83,6 +83,58 @@ paths:
               type: integer
              myname:
               type: string
+             
+ /myCategories2/{categoryID}:
+  get:
+    summary: my summary
+    description : my description
+    parameters: 
+     - name: categoryID
+       in: path
+       required: true
+       schema: 
+         type: integer
+         minimum: 10
+         maximum: 100
+       example: 11   
+    responses: 
+      '200':
+        description: dkjfkdf
+        content: 
+         application/json:
+          schema: 
+           type: array
+           items: 
+            type: object
+            properties: 
+             myid:
+              type: integer
+             myname:
+              type: string
+             
+ /myCategories3:
+  get:
+    summary: my summary
+    description : my description
+    responses: 
+      '200':
+        description: dkjfkdf
+        content: 
+         application/json:
+          schema: 
+           type: array
+           items: 
+            type: object
+            properties: 
+             myid:
+              type: integer
+             myname:
+              type: string
+                        
+             
+
+  
+             
            
            
           
