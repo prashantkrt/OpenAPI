@@ -1,0 +1,96 @@
+openapi: 3.0.3
+info: 
+ title: OpenAPI Learning :) 
+ description: |
+ 
+   # About Us
+    **sodales** ut _etiam_ sit `amet` nisl purus in mollis nunc sed id semper risus in hendrerit gravida rutrum quisque non tellus orci ac auctor augue mauris augue neque **gravida** in fermentum et sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi cras `fermentum` odio
+    
+   # Categories
+     nisi <u>*vitae suscipit tellus mauris*</u> a diam maecenas sed enim ut sem viverra aliquet eget sit <u>amet tellus</u> cras adipiscing
+    - mobiles
+      - apple 
+      - samsumg
+    - laptops
+    - tvs 
+    - headphones
+    - desktop
+    
+    ```
+     public void method()
+     {
+        System.out.println("Hello world");
+     }
+    
+    ```
+  
+   ## category2 
+    phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet enim
+    
+   ### category3
+    phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet enim
+    
+     
+ termsOfService: https://www.google.com   
+ contact:
+  name: Raj
+  email: akks@gmail.com
+  url: https://www.google.com   
+ license: 
+  name: name
+  url: https://google.com
+ version: 0.0.1
+servers:
+ - url: https://www.google.com
+   description: my description
+ - url: https://www.google.com
+   description: my description
+ - url: https://{username}.server.com:{port}/{version}
+   variables: 
+     username:
+       default: demo       
+       description: my description  
+     port:
+      enum:
+       - "8443"
+       - "443"
+      default: "8443"  
+      description: my description
+     version: 
+        default: v1  
+        description: my version
+   description: my description
+   
+tags: 
+ - name: Categories
+   description: Categories description
+ - name: Products
+   description: Product Description
+ - name: Orders
+   description: Order desscritions
+   
+paths: 
+ /categories: 
+   get: 
+     tags: 
+       - Categories
+     summary: list of all the categoires
+     description: returns the list of all categories
+     responses: 
+      '200':
+        description:  a list of categoies 
+        content: 
+         application/json: 
+          schema: 
+           type: array
+           items: 
+            type: object
+            properties: 
+             categoryid: 
+              type: integer
+             name: 
+              type: string
+             city:
+              type: string
+             address: 
+              type: string

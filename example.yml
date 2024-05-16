@@ -60,100 +60,9 @@ servers:
         default: v1  
         description: my version
    description: my description
-tags: 
- - name: Categories
-   description: Categories description
- - name: Products
-   description: Product Description
- - name: Orders
-   description: Order desscritions
-   
-paths: 
- /categories: 
-   get: 
-     tags: 
-       - Categories
-     summary: list of all the categoires
-     description: returns the list of all categories
-     responses: 
-      '200':
-        description:  a list of categoies 
-        content: 
-         application/json: 
-          schema: 
-           type: array
-           items: 
-            type: object
-            properties: 
-             categoryid: 
-              type: integer
-             name: 
-              type: string
-             city:
-              type: string
-             address: 
-              type: string
-              
- /mycategories:
-   post:
-    summary: dhsfjhsf
-    description : skhfskhfsd
-    parameters: 
-     - name: name
-       in: query
-       required: true  
-       schema: 
-         type: integer
-         minimum: 10
-         maximum: 100
-       example: 11   
-    responses: 
-      '200':
-        description: dkjfkdf
-        content: 
-         application/json:
-          schema: 
-           type: array
-           items: 
-            type: object
-            properties: 
-             myid:
-              type: integer
-             myname:
-              type: string
-             
- /myCategories2/{categoryID}:
-  get:
-    summary: my summary
-    description : my description
-    parameters: 
-     - name: categoryID
-       in: path
-       required: true
-       schema: 
-         type: integer
-         minimum: 10
-         maximum: 100
-       example: 11   
-    responses: 
-      '200':
-        description: dkjfkdf
-        content: 
-         application/json:
-          schema: 
-           type: array
-           items: 
-            type: object
-            properties: 
-             myid:
-              type: integer
-             myname:
-              type: string
-             
+paths:            
  /products:
   get:
-    tags: 
-       - Products
     summary: list of all products
     description : |
      **Lorem** Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with `desktop` publishing software like Aldus PageMaker including versions of Lorem Ipsum.
@@ -209,8 +118,6 @@ paths:
                 quantity: 11    
  /orders:
   post:
-   tags: 
-       - Orders
    summary: create order
    description : |
      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
