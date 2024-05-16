@@ -98,6 +98,40 @@
    responses: 
     '200':
       description: delete the order 
+      
+  get: 
+   summary: get the order details 
+   description: get the order details 
+   parameters: 
+    - name : orderId
+      in: query
+      required: false
+      schema: 
+       type: integer
+   responses: 
+    '200': 
+      description: get the order details
+      content: 
+       application/json:
+        schema: 
+         type: object
+         properties: 
+          orderId: 
+           type: integer
+          product: 
+           type: array 
+           items: 
+            type: object
+            properties: 
+             productId:
+              type: integer
+             name: 
+              type: string
+             price: 
+              type: integer
+             categoryName: 
+              type: integer
+               
                
                        
 
