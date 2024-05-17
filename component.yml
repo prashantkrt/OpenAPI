@@ -6,6 +6,7 @@ components:
       required: false
       schema: 
        type: integer
+
  schemas:
    Address: 
      type: object
@@ -14,8 +15,10 @@ components:
         type: string
        city: 
         type: string
+        readOnly: true
        state: 
         type: string
+        writeOnly: true
        zipcode: 
         type: string 
        isOfficeAddress: 
