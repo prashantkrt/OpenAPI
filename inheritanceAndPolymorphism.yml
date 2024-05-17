@@ -1,0 +1,446 @@
+# oneOf, allOf, anyOf, not
+
+
+
+
+openapi: 3.0.3
+info: 
+ title: OpenAPI Learning :) 
+ description: |
+ 
+   # About Us
+    **sodales** ut _etiam_ sit `amet` nisl purus in mollis nunc sed id semper risus in hendrerit gravida rutrum quisque non tellus orci ac auctor augue mauris augue neque **gravida** in fermentum et sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi cras `fermentum` odio
+    
+   # Categories
+     nisi <u>*vitae suscipit tellus mauris*</u> a diam maecenas sed enim ut sem viverra aliquet eget sit <u>amet tellus</u> cras adipiscing
+    - mobiles
+      - apple 
+      - samsumg
+    - laptops
+    - tvs 
+    - headphones
+    - desktop
+    
+    ```
+     public void method()
+     {
+        System.out.println("Hello world");
+     }
+    
+    ```
+  
+   ## category2 
+    phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet enim
+    
+   ### category3
+    phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet enim
+    
+     
+ termsOfService: https://www.google.com   
+ contact:
+  name: Raj
+  email: akks@gmail.com
+  url: https://www.google.com   
+ license: 
+  name: name
+  url: https://google.com
+ version: 0.0.1
+servers:
+ - url: https://www.google.com
+   description: my description
+ - url: https://www.google.com
+   description: my description
+ - url: https://{username}.server.com:{port}/{version}
+   variables: 
+     username:
+       default: demo       
+       description: my description  
+     port:
+      enum:
+       - "8443"
+       - "443"
+      default: "8443"  
+      description: my description
+     version: 
+        default: v1  
+        description: my version
+   description: my description
+tags: 
+ - name: Categories
+   description: Categories description
+ - name: Products
+   description: Product Description
+ - name: Orders
+   description: Order desscritions
+   
+paths: 
+ /categories: 
+   get: 
+     tags: 
+       - Categories
+     summary: list of all the categoires
+     description: returns the list of all categories
+     responses: 
+      '200':
+        description:  a list of categoies 
+        content: 
+         application/json: 
+          schema: 
+           type: array
+           items: 
+             $ref: "#/components/schemas/Categories"
+ 
+ /orders:
+  post:
+   tags: 
+       - Orders
+   summary: create order
+   description : |
+     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+   responses: 
+      '201':
+        description:  order created !!
+        content: 
+         application/json: 
+          schema: 
+           type: object
+           properties: 
+             prouctId: 
+              type: integer
+              
+      '500':
+        $ref: "#/components/responses/InternalServerError"
+        
+   requestBody: 
+    content: 
+     application/json: 
+      schema:
+       type: object 
+       properties: 
+        product: 
+          $ref: "#/components/schemas/Product"
+        address: 
+          $ref: "#/components/schemas/Address" 
+            
+  put: 
+   summary : update order details
+   description: update order details for processing and shipping
+   
+   responses: 
+    '201':
+      description: updated order details
+      # content: 
+      # application/json: 
+      #   schema: 
+      #   type: object
+      #   properties: 
+      #     result: 
+      #     type: string
+    '500':
+        $ref: "#/components/responses/InternalServerError"  
+          
+   requestBody: 
+    content: 
+     application/json: 
+      schema: 
+       type: object
+       properties: 
+        orderId: 
+         type: integer
+        product: 
+         type: array 
+         items: 
+           $ref: "#/components/schemas/Products"
+  delete: 
+   summary : update order details
+   description: update order details for processing and shipping
+   parameters: 
+      - $ref: "#/components/parameters/orderIdQueryParam"
+   responses: 
+    '204':
+      description: delete the order 
+    '500':
+        $ref: "#/components/responses/InternalServerError"  
+  get: 
+   summary: get the order details 
+   description: get the order details 
+   parameters: 
+     - $ref: "#/components/parameters/orderIdQueryParam"
+   responses: 
+    '200': 
+      description: get the order details
+      content: 
+       application/json:
+        schema: 
+         type: object
+         properties: 
+          orderId: 
+           type: integer
+          product: 
+           type: array 
+           items: 
+            $ref: "#/components/schemas/Products"
+    '500':
+        $ref: "#/components/responses/InternalServerError"        
+  
+ /oneOfOrder:
+   post: 
+    tags: 
+     - Orders
+    summary: my summary
+    description: my descrition 
+    requestBody:
+     description: my description
+     content: 
+      application/json: 
+       schema: 
+        type: object
+        properties: 
+         product: 
+          type: object 
+          oneOf: 
+           - $ref: "#/components/schemas/Mobile"
+           - $ref: "#/components/schemas/Laptop"
+         address: 
+           $ref: "#/components/schemas/Address"
+        required:
+         - product
+         - address
+    responses:
+     '200':
+        description: my description
+       
+         
+          
+    
+ /exampleObject: 
+  get: 
+   summary: my summary
+   description: my description
+   parameters: 
+    - name: categoryID
+      in: query
+      schema: 
+       type: integer
+       minimum: 100
+       maximum: 1000
+      examples: 
+       mobiles:
+        value: 101
+       laptops:
+        value: 102
+       headphones:
+        value: 103
+       televisions: 
+        value: 104
+   responses:
+    '200':
+     description: my description
+     content: 
+      application/json:
+       schema: 
+        type: array
+        items:
+         type: object
+         properties: 
+          para1:
+           type: integer
+          para2:
+           type: integer
+         required:
+          - para1
+          - para2  
+       example: 
+         para1: 1
+         para2: 2
+    '500':
+        $ref: "#/components/responses/InternalServerError"     
+         
+ /exampleObject2: 
+  get: 
+   summary: my summary
+   description: my description
+   parameters: 
+    - name: categoryID
+      in: query
+      schema: 
+       type: integer
+       minimum: 100
+       maximum: 1000
+      examples: 
+       mobiles:
+        value: 101
+       laptops:
+        value: 102
+       headphones:
+        value: 103
+       televisions: 
+        value: 104
+   responses:
+    '200':
+     description: my description
+     content: 
+      application/json:
+       schema: 
+        type: array
+        uniqueItems: true
+        items:
+         type: object
+         properties: 
+          para1:
+           type: integer
+          para2:
+           type: integer
+       examples:   
+         all-categories-data: 
+          summary: Categories example data 
+          value: 
+           - categoryId: 101
+             name: Mobiles
+           - categoryId: 102
+             name: Mobiles  
+           - categoryId: 103
+             name: Mobiles
+           - categoryId: 104
+             name: Mobiles 
+         single-category-data: 
+          summary: single category example data
+          value: 
+           - categoryId: 101
+             name: Mobiles
+    '500':
+        $ref: "#/components/responses/InternalServerError"       
+         
+components: 
+ parameters: 
+   orderIdQueryParam:
+      name : orderId
+      in: query
+      required: false
+      schema: 
+       type: integer
+ schemas:
+   Address: 
+     type: object
+     minProperties: 2
+     maxProperties: 8
+     properties:
+       addressLine: 
+        type: string
+        readOnly: true
+       city: 
+        type: string
+        writeOnly: true
+       state: 
+        type: string
+       zipcode: 
+        type: string 
+     required: [addressLine,city,state,zipcode]  
+     
+   Product: 
+       type: array
+       uniqueItems: true
+       items: 
+        type: object
+        minProperties: 2
+        maxProperties: 8
+        properties:
+         productID: 
+          type: integer
+         name: 
+          type: string
+         quantity:
+          type: integer
+          format: int32
+          
+   Products: 
+      type: object
+      properties: 
+       productId:
+        type: integer
+       name: 
+        type: string
+       price: 
+        type: integer
+       categoryName: 
+        type: string
+       isOfficeAddress:
+        type: boolean
+        nullable: true
+       date: 
+        type: string
+        format: date-time
+        nullable : true
+        
+   Categories: 
+      type: object
+      properties: 
+       categoryid: 
+        type: integer
+       name: 
+        type: string
+       city:
+        type: string
+       address: 
+        type: string
+   Mobile: 
+    allOf: 
+     - $ref: "#/components/schemas/Products"
+   Laptop: 
+    allOf: 
+     - $ref: "#/components/schemas/Products"
+     - type: object
+       properties: 
+        para1: 
+         type: integer
+        para2:
+         type: string
+         enum: 
+          - val1
+          - val2 
+        
+       
+ responses: 
+  InternalServerError: 
+   description: error occurred while processing the request
+   
+        
+   
+  
+        
+               
+         
+         
+       
+           
+
+         
+          
+       
+    
+      
+     
+      
+          
+   
+   
+  
+       
+             
+              
+                        
+             
+
+  
+             
+           
+           
+          
+          
+      
+  
+     
+    
+ 
+   
+ 
