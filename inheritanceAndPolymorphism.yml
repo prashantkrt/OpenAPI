@@ -1,8 +1,4 @@
 # oneOf, allOf, anyOf, not
-
-
-
-
 openapi: 3.0.3
 info: 
  title: OpenAPI Learning :) 
