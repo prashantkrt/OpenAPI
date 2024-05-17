@@ -18,6 +18,9 @@ components:
         type: string
        zipcode: 
         type: string 
+       isOfficeAddress: 
+        type: boolean 
+        nullable: true
      required: [addressLine,city,state,zipcode]  
      
    Product: 
