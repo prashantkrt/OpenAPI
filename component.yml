@@ -1,0 +1,61 @@
+components: 
+ parameters: 
+   orderIdQueryParam:
+      name : orderId
+      in: query
+      required: false
+      schema: 
+       type: integer
+ schemas:
+   Address: 
+     type: object
+     properties:
+       addressLine: 
+        type: string
+       city: 
+        type: string
+       state: 
+        type: string
+       zipcode: 
+        type: string 
+     required: [addressLine,city,state,zipcode]  
+     
+   Product: 
+       type: array
+       items: 
+        type: object
+        properties:
+         productID: 
+          type: integer
+         name: 
+          type: string
+         quantity:
+          type: integer
+          format: int32
+          
+   Products: 
+      type: object
+      properties: 
+       productId:
+        type: integer
+       name: 
+        type: string
+       price: 
+        type: integer
+       categoryName: 
+        type: string
+        
+   Categories: 
+      type: object
+      properties: 
+       categoryid: 
+        type: integer
+       name: 
+        type: string
+       city:
+        type: string
+       address: 
+        type: string
+   
+  
+        
