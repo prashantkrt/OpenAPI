@@ -323,7 +323,36 @@ paths:
      '200':
         description: my description
        
+ /anyOfOrder:
+   post: 
+    tags: 
+     - Orders
+    summary: my summary
+    description: my descrition 
+    parameters:
+     - $ref: "#/components/parameters/orderIdQueryParam"
+     - name: fetchType
+       in : query
+       required: true
+       schema: 
+        type: string
+        enum: 
+         - summary
+         - details
          
+    responses:
+     '200':
+        description: my description 
+        content: 
+         application/json: 
+          schema: 
+           type: object
+           properties: 
+            product: 
+             type: object 
+             anyOf: 
+              - $ref: "#/components/schemas/OrderSummary"
+              - $ref: "#/components/schemas/OrderDetails"
           
     
  /exampleObject: 
@@ -511,8 +540,20 @@ components:
          enum: 
           - val1
           - val2 
-        
-       
+   OrderSummary: 
+      type: object
+      properties: 
+        summaryId: 
+         type: integer
+        name: 
+          type: string 
+   OrderDetails:  
+      type: object
+      properties: 
+        detailId: 
+         type: integer
+        name: 
+          type: string 
  responses: 
   InternalServerError: 
    description: error occurred while processing the request
