@@ -214,6 +214,9 @@ paths:
            properties: 
              prouctId: 
               type: integer
+      '500':
+        $ref: "#/components/responses/InternalServerError"
+        
    requestBody: 
     content: 
      application/json: 
@@ -239,6 +242,8 @@ paths:
       #   properties: 
       #     result: 
       #     type: string
+    '500':
+        $ref: "#/components/responses/InternalServerError"  
           
    requestBody: 
     content: 
@@ -260,6 +265,8 @@ paths:
    responses: 
     '204':
       description: delete the order 
+    '500':
+        $ref: "#/components/responses/InternalServerError"  
   get: 
    summary: get the order details 
    description: get the order details 
@@ -279,6 +286,8 @@ paths:
            type: array 
            items: 
             $ref: "#/components/schemas/Products"
+    '500':
+        $ref: "#/components/responses/InternalServerError"        
               
  /exampleObject: 
   get: 
@@ -317,6 +326,8 @@ paths:
        example: 
          para1: 1
          para2: 2
+    '500':
+        $ref: "#/components/responses/InternalServerError"     
          
  /exampleObject2: 
   get: 
@@ -369,6 +380,8 @@ paths:
           value: 
            - categoryId: 101
              name: Mobiles
+    '500':
+        $ref: "#/components/responses/InternalServerError"       
          
 components: 
  parameters: 
@@ -428,6 +441,11 @@ components:
         type: string
        address: 
         type: string
+ responses: 
+  InternalServerError: 
+   description: error occurred while processing the request
+   
+        
    
   
         
