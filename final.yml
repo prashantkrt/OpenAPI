@@ -75,6 +75,8 @@ paths:
        - Categories
      summary: list of all the categoires
      description: returns the list of all categories
+     deprecated: true
+     operationId: getCategories
      responses: 
       '200':
         description:  a list of categoies 
@@ -119,6 +121,7 @@ paths:
   get:
     summary: my summary
     description : my description
+    operationId: getMyCategories
     parameters: 
      - name: categoryID
        in: path
@@ -153,6 +156,7 @@ paths:
     summary: list of all products
     description : |
      **Lorem** Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with `desktop` publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    operationId: getProducts 
     parameters: 
       - name: name
         in : query
@@ -209,7 +213,8 @@ paths:
        - Orders
    summary: create order
    description : |
-     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+   operationId: getOrders
    responses: 
       '201':
         description:  order created !!
@@ -238,7 +243,7 @@ paths:
   put: 
    summary : update order details
    description: update order details for processing and shipping
-   
+   operationId: updateOrders
    responses: 
     '201':
       description: updated order details
@@ -267,6 +272,7 @@ paths:
   delete: 
    summary : update order details
    description: update order details for processing and shipping
+   operationId: deleteOrders
    parameters: 
       - $ref: "#/components/parameters/orderIdQueryParam"
    responses: 
@@ -275,12 +281,15 @@ paths:
     '500':
         $ref: "#/components/responses/InternalServerError"  
   get: 
+   tags: 
+    - Orders
    summary: get the order details 
    description: get the order details 
+   operationId: getOrderDetails
    parameters: 
      - $ref: "#/components/parameters/orderIdQueryParam"
    responses: 
-    '200': 
+    '201': 
       description: get the order details
       content: 
        application/json:
@@ -293,15 +302,47 @@ paths:
            type: array 
            items: 
             $ref: "#/components/schemas/Products"
+      links: 
+       GetOrderByOrderId: 
+        $ref: "#/components/links/GetOrderByOrderId"
+       
     '500':
-        $ref: "#/components/responses/InternalServerError"        
-  
+        $ref: "#/components/responses/InternalServerError"   
+        
+ /orders/{orderId}:
+   get: 
+     tags: 
+      - Orders
+     summary: get the order details 
+     description: get the order details 
+     operationId: getOrderDetailsUsingPathParams
+     deprecated: true
+     parameters: 
+       - $ref: "#/components/parameters/orderIdPathParam"
+     responses: 
+      '200': 
+        description: get the order details
+        content: 
+         application/json:
+          schema: 
+           type: object
+           properties: 
+            orderId: 
+             type: integer
+            product: 
+             type: array 
+             items: 
+              $ref: "#/components/schemas/Products"
+      '500':
+          $ref: "#/components/responses/InternalServerError"
+ 
  /oneOfOrder:
    post: 
     tags: 
      - Orders
     summary: my summary
     description: my descrition 
+    operationId: getOneOfTheOrder
     requestBody:
      description: my description
      content: 
@@ -329,6 +370,7 @@ paths:
      - Orders
     summary: my summary
     description: my descrition 
+    operationId: getAnyOfTheOrder
     parameters:
      - $ref: "#/components/parameters/orderIdQueryParam"
      - name: fetchType
@@ -359,6 +401,7 @@ paths:
   get: 
    summary: my summary
    description: my description
+   operationId: getExampleObject
    parameters: 
     - name: categoryID
       in: query
@@ -402,6 +445,7 @@ paths:
   get: 
    summary: my summary
    description: my description
+   operationId: getExampleObject2
    parameters: 
     - name: categoryID
       in: query
@@ -461,6 +505,13 @@ components:
       required: false
       schema: 
        type: integer
+ 
+   orderIdPathParam:
+      name : orderId
+      in: path
+      required: true
+      schema: 
+       type: integer       
  schemas:
    Address: 
      type: object
@@ -557,6 +608,14 @@ components:
  responses: 
   InternalServerError: 
    description: error occurred while processing the request
+ links: 
+   GetOrderByOrderId: 
+    description: > 
+      The `orderId` value retured in the response can be used as input paramaters in `GET/orders`.
+    operationId: getProductDetails
+    parameters: 
+     orderId: '$response.body#/orderId'
+     
    
         
    

@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: Test
+  version: '1.0'
+tags: 
+  - name: Artifacts
+paths:
+  /artifacts:
+    post:
+      tags: 
+        - Artifacts
+      operationId: createArtifact
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        201:
+          description: create
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+                example: /artifacts/100
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  artifactId:
+                    type: integer
+                    format: int64
+          links:
+            Read Artifact:
+              operationId: getArtifact
+              parameters:
+                artifact-id: '$response.body#/artifactId'
+
+  /artifacts/{artifact-id}:
+    parameters:
+      - name: artifact-id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+    get:
+      tags: 
+        - Artifacts
+      operationId: getArtifact
+      responses:
+        200:
+          description: read
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
