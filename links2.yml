@@ -25,21 +25,15 @@ paths:
                   id:
                     type: integer
                     format: int64
-                    description: ID of the created user.
-          # -----------------------------------------------------
-          # Links
-          # -----------------------------------------------------
+                    description: ID of the created user.         
           links:
-            GetUserByUserId:   # <---- arbitrary name for the link
-              operationId: getUser
-              # or
-              # operationRef: '#/paths/~1users~1{userId}/get'
+            GetUserByUserId:  
+              operationId: getUser             
               parameters:
                 userId: '$response.body#/id'
               description: >
                 The `id` value returned in the response can be used as
-                the `userId` parameter in `GET /users/{userId}`.
-          # -----------------------------------------------------
+                the `userId` parameter in `GET /users/{userId}`.         
   /users/{userId}:
     get:
       summary: Gets a user by ID

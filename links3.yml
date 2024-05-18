@@ -2,8 +2,7 @@ paths:
   /users:
     post:
       summary: Create a user
-      operationId: createUser
-       ...
+      operationId: createUser      
       responses:
         '201':
           description: Created
@@ -18,12 +17,11 @@ paths:
                     description: ID of the created user.
           links:
             GetUserByUserId:
-              $ref: '#/components/links/GetUserByUserId'    # <-------
+              $ref: '#/components/links/GetUserByUserId'    
   /user/{userId}:
     patch:
       summary: Update user
-      operationId: updateUser
-       ...
+      operationId: updateUser      
       responses:
         '200':
           description: The updated user object
@@ -33,15 +31,14 @@ paths:
                 $ref: '#/components/schemas/User'
           links:
             GetUserByUserId:
-              $ref: '#/components/links/GetUserByUserId'    # <-------
+              $ref: '#/components/links/GetUserByUserId'   
       
     get:
       summary: Get a user by ID
-      operationId: getUser
-       ...
+      operationId: getUser    
 components:
   links:
-    GetUserByUserId:   # <----- The $ref's above point here
+    GetUserByUserId: 
       description: >
         The `id` value returned in the response can be used as
         the `userId` parameter in `GET /users/{userId}`.
