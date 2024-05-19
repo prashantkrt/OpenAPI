@@ -1,5 +1,7 @@
 openapi: 3.0.3
+
 x-sample: sample data
+
 info: 
  title: OpenAPI Learning :) 
  description: |
@@ -49,6 +51,7 @@ info:
   name: name
   url: https://google.com
  version: 0.0.1
+ 
 servers:
  - url: https://www.google.com
    description: my description
@@ -69,9 +72,11 @@ servers:
         default: v1  
         description: my version
    description: my description
+   
 externalDocs: 
  description: external docs
  url: "https://www.google.com"
+ 
 tags: 
  - name: Categories
    description: Categories description
@@ -79,7 +84,20 @@ tags:
    description: Product Description
  - name: Orders
    description: Order desscritions
-   
+
+security:
+ - BasicAuth: []
+ - BearerAuth: []
+ - ApiKeyAuth: []
+ - oAuth2AuthCode: 
+    - read
+    - write
+    - admin
+ - OpenId: 
+    - read
+    - write
+    - admin
+ 
 paths: 
  /categories: 
    get: 
@@ -92,6 +110,8 @@ paths:
      description: returns the list of all categories
      deprecated: true
      operationId: getCategories
+     security:
+      - BasicAuth: []
      responses: 
       '200':
         description:  a list of categoies 
@@ -105,6 +125,9 @@ paths:
    post:
     summary: dhsfjhsf
     description : skhfskhfsd
+    security:
+      - BasicAuth: []
+      - BearerAuth: []
     parameters: 
      - name: name
        in: query
@@ -137,6 +160,9 @@ paths:
     summary: my summary
     description : my description
     operationId: getMyCategories
+    security:
+      - BasicAuth: []
+      - BearerAuth: []
     parameters: 
      - name: categoryID
        in: path
@@ -172,6 +198,9 @@ paths:
     description : |
      **Lorem** Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with `desktop` publishing software like Aldus PageMaker including versions of Lorem Ipsum.
     operationId: getProducts 
+    security:
+      - BasicAuth: []
+      - BearerAuth: []
     parameters: 
       - name: name
         in : query
@@ -230,6 +259,9 @@ paths:
    description : |
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
    operationId: getOrders
+   security:
+      - BasicAuth: []
+      - BearerAuth: []
    responses: 
       '201':
         description:  order created !!
@@ -331,6 +363,18 @@ paths:
      summary: get the order details 
      description: get the order details 
      operationId: getOrderDetailsUsingPathParams
+     security:
+       - BasicAuth: []
+       - BearerAuth: []
+       - ApiKeyAuth: []
+       - oAuth2AuthCode: 
+          - read
+          - write
+          - admin
+       - OpenId: 
+          - read
+          - write
+          - admin
      deprecated: true
      parameters: 
        - $ref: "#/components/parameters/orderIdPathParam"
@@ -630,6 +674,33 @@ components:
     operationId: getProductDetails
     parameters: 
      orderId: '$response.body#/orderId'
+ securitySchemes: 
+  BasicAuth: 
+   type: http
+   scheme: basic  
+  BearerAuth:
+   type: http
+   scheme: bearer
+   bearerFormat: JWT
+  ApiKeyAuth:
+   type: apiKey
+   in: header
+   name: X-API-KEY
+  oAuth2AuthCode:
+   type: oauth2
+   flows:
+    authorizationCode: 
+     authorizationUrl: https://example.com/oauth/authorize
+     tokenUrl: https://example.com/api/oauth.access
+     scopes:
+      read: Read only access
+      write: Read write access
+      admin: Admin access
+  OpenId: 
+   type: openIdConnect
+   openIdConnectUrl: https://example.com/.well-known/openid-configuration
+   
+  
      
    
         
